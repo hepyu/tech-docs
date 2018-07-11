@@ -1,0 +1,21 @@
+1.不想让某些sql写入binlog:
+
+使用Mysql参数：
+
+set sql_log_bin=0;  #当前会话执行的sql不进入binlog
+
+sql执行   #这些sql不会进binlog
+
+set sql_log_bin=1;  #处理后要重置当前会话
+
+gobal sql_log_bin慎用，而且以后版本会废弃。
+
+The global sql_log_bin variable is read only and cannot be modified. The global scope is deprecated and will be removed in a future MySQL release.
+
+It is not possible to set @@session.sql_log_bin within a transaction or subquery.
+
+参考：
+
+https://dev.mysql.com/doc/refman/5.7/en/set-sql-log-bin.html
+
+http://xmgu2008.blog.163.com/blog/static/13912238020140182538576/
