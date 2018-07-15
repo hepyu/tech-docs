@@ -1,0 +1,43 @@
+一、安装本地jar包到本地仓库
+
+1.cmd命令进入该jar包所在路径
+
+2.执行命令：
+mvn install:install-file -Dfile=lucene-queryparser-4.6.1.jar
+-DgroupId=org.apache.lucene -DartifactId=lucene-queryparser
+-Dversion=4.6.1 -Dpackaging=jar
+
+其中：-DgroupId和-DartifactId的作用是指定了这个jar包在repository的安装路径，只是用来告诉项目去这个路径下寻找这个名称的jar包。
+比如：
+
+mvn install:install-file -Dfile=hadoop-hdfs-2.2.0.jar
+-DgroupId=org.apache.hadoop -DartifactId=hadoop-hdfs -Dversion=2.2.0 -D
+-Dpackaging=jar
+
+就是指把hadoop-hdfs-2.2.0.jar安装到repository\org.apache.hadoop\hadoop-hdfs\2.2.0目录下，执行完命令后，如果需要在项目中使用这个jar，则在pom.xml中添加如下配置即可：
+
+<dependency>
+<groupId>org.apache.hadoop</groupId>
+<artifactId>hadoop-hdfs</artifactId>
+<version>2.2.0</version>
+</dependency>
+注意在每个参数前有个-D
+
+二、怎么在pom.xml中添加项目中libs下的jar呢，而不是从本地仓库中添加？
+
+1、首先将要添加的jar包复制到项目中的libs文件夹下
+
+2、然后在pom.xml中添加如下代码：
+
+[html] view plain copy
+
+<dependency>
+<groupId>htmlunit</groupId>
+<artifactId>htmlunit</artifactId>
+<version>2.21-OSGi</version>
+<scope>system</scope>
+<systemPath>${project.basedir}/libs/htmlunit-2.21-OSGi.jar</systemPath>
+</dependency>
+
+注意scope元素和systemPath元素，其中systemPath元素指定的就是jar包在项目中的路径。
+注意libs文件夹下的这个jar包不需要Add to Build Path
