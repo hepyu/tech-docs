@@ -15,4 +15,36 @@ yum -y install perl-Digest-MD5
 
 https://www.percona.com/doc/percona-toolkit/2.2/pt-query-digest.html
 
-# 2.
+# 2.查看慢查位置：
+
+show variables like '%quer%';
+
++----------------------------------------+---------------------------------+
+| Variable_name                          | Value                           |
++----------------------------------------+---------------------------------+
+| binlog_rows_query_log_events           | OFF                             |
+| ft_query_expansion_limit               | 20                              |
+| have_query_cache                       | NO                              |
+| log_queries_not_using_indexes          | OFF                             |
+| log_throttle_queries_not_using_indexes | 0                               |
+| long_query_time                        | 10.000000                       |
+| query_alloc_block_size                 | 8192                            |
+| query_prealloc_size                    | 8192                            |
+| slow_query_log                         | ON                             |
+| slow_query_log_file                    | /var/lib/mysql/rabbit1-slow.log |
++----------------------------------------+---------------------------------+
+
+slow_query_log=ON表示开启慢查日志，OFF表示关闭，一般都是ON。
+
+slow_query_log_file表示慢查日志位置。
+
+long_query_time表示慢查阈值。单位是秒，这里的配置是超过10秒才认为是慢查。
+
+# 3.pt-query-digest命令行
+
+## 3.1.简单分析：其余高阶命令查看官网，后续整理。
+
+pt-query-digest rabbit1-slow.log
+
+
+
