@@ -1,0 +1,18 @@
+# 1.慢查分析工具
+
+有很多，这里说pt-query-digest:
+
+https://www.percona.com/downloads/percona-toolkit/LATEST/
+
+选together下载，解压后有两个rpm包，依次安装：  rpm -ivh x.rpm
+
+
+qa1.can't locate Digest/MD5.pm ...
+
+yum -y install perl-Digest-MD5
+
+命令行说明地址：
+
+https://www.percona.com/doc/percona-toolkit/2.2/pt-query-digest.html
+
+# 2.
