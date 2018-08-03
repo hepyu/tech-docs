@@ -1,4 +1,4 @@
-1.不想让某些sql写入binlog:
+# 1.不想让某些sql写入binlog:
 
 使用Mysql参数：
 
@@ -19,3 +19,11 @@ It is not possible to set @@session.sql_log_bin within a transaction or subquery
 https://dev.mysql.com/doc/refman/5.7/en/set-sql-log-bin.html
 
 http://xmgu2008.blog.163.com/blog/static/13912238020140182538576/
+
+# 2.分析binlog日志
+ 
+主要是为了找到DB直查TOP多&TOP慢的SQL，TOP慢优先。
+
+mysqlbinlog binlog.000009 > binlog.000009.hpy   binglog不是text格式，需要用mysqlbinlog先转化一下。
+
+pt-query-digest  --type=binlog binlog.000009   > binglog.parse.result.log   再用pt去分析得到最终统计结果，格式和(2)中一样。
