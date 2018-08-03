@@ -6,6 +6,13 @@ https://www.percona.com/downloads/percona-toolkit/LATEST/
 
 选together下载，解压后有两个rpm包，依次安装：  rpm -ivh x.rpm
 
+yum install perl-DBI
+
+yum install perl-DBD-MySQL
+
+yum install perl-Time-HiRes
+
+yum install perl-IO-Socket-SSL
 
 qa1.can't locate Digest/MD5.pm ...
 
