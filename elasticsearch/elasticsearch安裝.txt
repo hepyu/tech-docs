@@ -1,0 +1,23 @@
+(1).elasticsearch5.6.8安装
+
+从官网下载执行 rpm -ivh x.tar.gz
+
+systemctl start|stop|status elasticsearch
+
+如果启动失败，进入/usr/share/elasticsearch/bin目录启动./elasticsearch
+
+如果报错，按照提示解决。
+
+典型错误：
+
+提示config没有，建立/usr/share/elasticsearch/config,然后将/etc/elasticsearch/*的文件都copy到这里。
+
+内存不够，修改config/jvm.option里的xmn,xmx。
+
+不允许root启动，suadd es -p 123456，然后su es后启动。
+
+各种权限问题。
+
+还不行/etc/profile：export ES_JAVA_OPTS="-Xmx512m -Xms512m" ；然后source /etc/profile
+
+还不行：~/.bashrc ；export ES_JAVA_OPTS="-Xmx512m -Xms512m"
