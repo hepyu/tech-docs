@@ -1,0 +1,11 @@
+QA1.
+python: ImportError: No module named bz2
+在安装node.js时提示ImportError: No module named bz2。
+
+很明显这个python中没有装bz2的库导致的。
+
+解决方法：
+
+yum install bzip2-devel
+
+然后需要重新编译一下python，之后再import bz2就不会提示错误了。

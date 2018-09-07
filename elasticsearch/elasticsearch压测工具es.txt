@@ -1,0 +1,16 @@
+参见：
+http://esrally.lyremelody.org/zh_CN/latest/recipes.html
+https://www.elastic.co/blog/announcing-rally-benchmarking-for-elasticsearch
+
+官方benchmark指标：
+https://medium.appbase.io/benchmarking-elasticsearch-1-million-writes-per-sec-bf37e7ca8a4c
+
+
+安装过程：
+pip3 install esrally 
+esrally configure 
+esrally --pipeline=from-distribution --distribution-version=5.0.0-alpha1
+
+
+
+esrally --track=pmc --target-hosts=es1:9200,es2:9200,es3:9200,es4:9200 --pipeline=benchmark-only

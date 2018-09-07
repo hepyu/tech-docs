@@ -1,0 +1,60 @@
+URL:https://www.jianshu.com/p/5e4cb6eca523
+
+快速开始
+这一部分我们将构建与启动一个运行在本地的Zipkin实例。有三种方式：使用JAVA、Docker或运行源码。
+如果你对Docker很熟悉，下面是首选的启动方式。如果你对Docker不熟悉，可以通过java或运行源码启动。
+
+不管你是如何启动Zipkin的，请打开浏览器http://your_host:9411就可以看到追踪。
+
+Docker
+Docker Zipkin项目能够构建docker images，提供脚本scripts ，并且提供了docker-compose.yml来launching pre-built images（加载编译前的图像？？？不懂Docker勉强翻译）。
+docker run -d -p 9411:9411 openzipkin/zipkin
+
+Java
+如果你安装了Java 8 及以上版本，启动项目最快的方式是获取 latest release最新的版本作为独立的可执行的jar：
+
+wget -O zipkin.jar 'https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec'
+java -jar zipkin.jar
+Running from Source运行源码
+如果你想探索Zipkin的新特性，Zipkin也支持以源码方式运行。该方式需要你获取Zipkin’s sourceZipKin源码并且编译它。
+
+# get the latest source
+git clone https://github.com/openzipkin/zipkin
+cd zipkin
+# Build the server and also make its dependencies
+./mvnw -DskipTests --also-make -pl zipkin-server clean install
+# Run the server
+java -jar ./zipkin-server/target/zipkin-server-*exec.jar
+如果您做了一些有趣的功能，请顺便在gitter与我们交流。
+
+
+
+官方URL：https://zipkin.io/pages/quickstart
+
+Quickstart
+In this section we’ll walk through building and starting an instance of Zipkin for checking out Zipkin locally. There are three options: using Java, Docker or running from source.
+
+If you are familiar with Docker, this is the preferred method to start. If you are unfamiliar with Docker, try running via Java or from source.
+
+Regardless of how you start Zipkin, browse to http://your_host:9411 to find traces!
+
+Docker
+The Docker Zipkin project is able to build docker images, provide scripts and a docker-compose.yml for launching pre-built images. The quickest start is to run the latest image directly:
+
+docker run -d -p 9411:9411 openzipkin/zipkin
+Java
+If you have Java 8 or higher installed, the quickest way to get started is to fetch the latest release as a self-contained executable jar:
+
+curl -sSL https://zipkin.io/quickstart.sh | bash -s
+java -jar zipkin.jar
+Running from Source
+Zipkin can be run from source if you are developing new features. To achieve this, you’ll need to get Zipkin’s source and build it.
+
+# get the latest source
+git clone https://github.com/openzipkin/zipkin
+cd zipkin
+# Build the server and also make its dependencies
+./mvnw -DskipTests --also-make -pl zipkin-server clean install
+# Run the server
+java -jar ./zipkin-server/target/zipkin-server-*exec.jar
+Stop by and socialize with us on gitter, if you end up making something interesting!

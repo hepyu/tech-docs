@@ -1,0 +1,7 @@
+(1).prometheus性能飙高：
+
+官方：https://github.com/prometheus/prometheus/issues/3944
+
+go tool pprof --svg http://prometheus:9090/debug/pprof/profile > prof.csv
+go tool pprof --gif http://172.16.10.227:9090/debug/pprof/profile > prof.gif
+

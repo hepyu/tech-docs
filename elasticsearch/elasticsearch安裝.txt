@@ -21,3 +21,103 @@ systemctl start|stop|status elasticsearch
 还不行/etc/profile：export ES_JAVA_OPTS="-Xmx512m -Xms512m" ；然后source /etc/profile
 
 还不行：~/.bashrc ；export ES_JAVA_OPTS="-Xmx512m -Xms512m"
+
+因为elasticsearch不同(大)版本之间的安装存在差异，单开。
+
+ 
+
+(2).详细步骤:
+
+从官网下载执行 
+
+https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-8
+
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.8.rpm
+
+安装：rpm -ivh x.tar.gz
+
+ 
+
+配置文件：
+
+cd /usr/share/elasticsearch
+
+ln -s  ./config /etc/elasticsearch
+
+ln [options] existingfile newfile（sexistingfile 待建立链接文件的文件，newfile是新创建的链接文件）
+
+纳闷了，安装文件为啥这么诡异
+
+ 
+
+不能使用root启动
+
+useradd es
+
+chown -R es:es config
+
+cd config
+
+chown -R es:es *
+
+注意日志文件权限
+
+
+修改config/elasticsearch.yml:
+cluster.name: my-application
+node.name: node-1
+node.attr.rack: r1
+path.data: /data/xx/es/data
+path.logs: /data/xx/es/logs
+http.port: 9200
+network.host: 0.0.0.0
+
+启动：
+
+/usr/share/elasticsearch/bin/elasticsearch -d
+
+ 
+
+报错1：java.lang.UnsupportedOperationException: seccomp unavailable: CONFIG_SECCOMP not compiled into kernel, CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER are needed
+
+因为Centos6不支持SecComp，而ES5.5.2默认bootstrap.system_call_filter为true进行检测 
+
+elasticsearch.yml中增加配置项：bootstrap.system_call_filter: false
+
+ 
+
+报错2：
+
+[1]: max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
+[2]: max number of threads [1024] for user [es] is too low, increase to at least [2048]
+[3]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+
+对于[1]：
+vi /etc/security/limits.conf #添加如下内容:
+* soft nofile 131072
+* hard nofile 131072
+* soft nproc 131072
+* hard nproc 131072
+
+* soft nofile unlimited
+* hard nofile unlimited
+* soft nproc unlimited
+* hard nproc unlimited
+
+对于[2]：
+vi /etc/security/limits.d/90-nproc.conf 
+#修改如下内容：
+* soft nproc 1024
+#修改为
+* soft nproc 2048
+
+对于[3]：
+vi /etc/sysctl.conf
+#添加下面配置：
+vm.max_map_count=655360
+#并执行命令：
+sysctl -p
+或者：
+sysctl -w vm.max_map_count=262144
+验证：sysctl vm.max_map_count
+https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html

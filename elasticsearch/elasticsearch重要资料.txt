@@ -1,0 +1,4 @@
+
+ELASTICSEARCH RALLY：对elasticsearch做基准测试:
+http://esrally.lyremelody.org/zh_CN/latest/recipes.html
+https://www.elastic.co/blog/announcing-rally-benchmarking-for-elasticsearch

@@ -1,0 +1,5 @@
+1.springcloud官网：http://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-netflix.html
+
+2.eureka官方文档：
+	从这里进去选择对应的版本文档：https://cloud.spring.io/spring-cloud-netflix/
+	2.0.1：http://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.0.1.RELEASE/

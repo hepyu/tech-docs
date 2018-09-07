@@ -1,0 +1,12 @@
+1.关于eureka.dashboard.path和defaultZone:
+ dashboard:
+  path: /eurekawebui
+ client:
+  service-url:
+    defaultZone: http://eureka-server-ldn.com:7002/eureka/,http://eureka-server-sgr.com:7003/eureka/
+在低版本中，dashboard.path可以和defaultZone中的/eureka匹配，这样eurekawebui里的DS Replicas里的链接就会生效。
+后来我升级到了netflix-eureka-server-2.0.1-release时，不生效了，跟了下代码，看了下文档，应该是bug。
+老外也有遇到相似问题。
+https://stackoverflow.com/questions/31993718/why-dont-eureka-ds-replicas-links-work
+
+2.eureka.instance.hostname：主机名可以在配置时确定（否则将从OS原语中猜出）。
