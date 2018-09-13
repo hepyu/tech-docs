@@ -1,0 +1,12 @@
+格式化	Ctrl+Alt+L
+在当前类找某个方法  Ctrl + F12
+全文查找：  Ctrl + Shift + F
+
+查找接口的实现类：
+IDEA 风格 ctrl + alt +B
+
+查看类或接口的继承关系：
+ctrl + h
+
+查找谁调用了这个方法：
+右键点击 Find Usage
