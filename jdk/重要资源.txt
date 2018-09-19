@@ -1,2 +1,5 @@
 1.官方bug数据库：
 https://bugs.java.com/view_bug.do?bug_id=6531345
+
+2.JDK存档下载：
+http://www.oracle.com/technetwork/cn/java/archive-139210-zhs.html
