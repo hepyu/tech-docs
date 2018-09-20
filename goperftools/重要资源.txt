@@ -4,6 +4,8 @@ https://gperftools.github.io/gperftools/heapprofile.html
 2.重要文章：
 https://gperftools.github.io/gperftools/heapprofile.html
 
+/app/3rd/gperftools/bin/pprof --text $JAVA_HOME/bin/java gperftools_24791.0004.heap
+
 Text display
 % pprof --text gfs_master /tmp/profile.0100.heap
    255.6  24.7%  24.7%    255.6  24.7% GFS_MasterChunk::AddServer

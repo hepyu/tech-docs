@@ -1,0 +1,57 @@
+heap profile:      1:       80 [     1:       80] @ heapprofile
+     1:       80 [     1:       80] @ 0x7faffac9a269 0x7faffac97c3a 0x00400696 0x7faffa6eab35 0x00400559
+
+MAPPED_LIBRARIES:
+00400000-00401000 r-xp 00000000 00:00 4170        /app/3rd/jdk/jdk1.8.0_65/bin/java
+00600000-00601000 rw-p 00000000 00:00 4170        /app/3rd/jdk/jdk1.8.0_65/bin/java
+020e2000-029e2000 rw-p 00000000 00:00 0           [heap]
+7faff9b30000-7faff9c90000 rw-p 00000000 00:00 0           
+7faff9c90000-7faff9ca5000 r-xp 00000000 00:00 663601      /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7faff9ca5000-7faff9ea4000 ---p 00015000 00:00 663601      /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7faff9ea4000-7faff9ea5000 r--p 00014000 00:00 663601      /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7faff9ea5000-7faff9ea6000 rw-p 00015000 00:00 663601      /usr/lib64/libgcc_s-4.8.5-20150702.so.1
+7faff9ea6000-7faff9fa6000 r-xp 00000000 00:00 657577      /usr/lib64/libm-2.17.so
+7faff9fa6000-7faffa1a6000 ---p 00100000 00:00 657577      /usr/lib64/libm-2.17.so
+7faffa1a6000-7faffa1a7000 r--p 00100000 00:00 657577      /usr/lib64/libm-2.17.so
+7faffa1a7000-7faffa1a8000 rw-p 00101000 00:00 657577      /usr/lib64/libm-2.17.so
+7faffa1a8000-7faffa291000 r-xp 00000000 00:00 657612      /usr/lib64/libstdc++.so.6.0.19
+7faffa291000-7faffa490000 ---p 000e9000 00:00 657612      /usr/lib64/libstdc++.so.6.0.19
+7faffa490000-7faffa498000 r--p 000e8000 00:00 657612      /usr/lib64/libstdc++.so.6.0.19
+7faffa498000-7faffa49a000 rw-p 000f0000 00:00 657612      /usr/lib64/libstdc++.so.6.0.19
+7faffa49a000-7faffa4af000 rw-p 00000000 00:00 0           
+7faffa4af000-7faffa4ba000 r-xp 00000000 00:00 668583      /usr/local/lib/libunwind.so.8.0.1
+7faffa4ba000-7faffa6b9000 ---p 0000b000 00:00 668583      /usr/local/lib/libunwind.so.8.0.1
+7faffa6b9000-7faffa6ba000 r--p 0000a000 00:00 668583      /usr/local/lib/libunwind.so.8.0.1
+7faffa6ba000-7faffa6bb000 rw-p 0000b000 00:00 668583      /usr/local/lib/libunwind.so.8.0.1
+7faffa6bb000-7faffa6c9000 rw-p 00000000 00:00 0           
+7faffa6c9000-7faffa880000 r-xp 00000000 00:00 657569      /usr/lib64/libc-2.17.so
+7faffa880000-7faffaa7f000 ---p 001b7000 00:00 657569      /usr/lib64/libc-2.17.so
+7faffaa7f000-7faffaa83000 r--p 001b6000 00:00 657569      /usr/lib64/libc-2.17.so
+7faffaa83000-7faffaa85000 rw-p 001ba000 00:00 657569      /usr/lib64/libc-2.17.so
+7faffaa85000-7faffaa8a000 rw-p 00000000 00:00 0           
+7faffaa8a000-7faffaa8c000 r-xp 00000000 00:00 657575      /usr/lib64/libdl-2.17.so
+7faffaa8c000-7faffac8c000 ---p 00002000 00:00 657575      /usr/lib64/libdl-2.17.so
+7faffac8c000-7faffac8d000 r--p 00002000 00:00 657575      /usr/lib64/libdl-2.17.so
+7faffac8d000-7faffac8e000 rw-p 00003000 00:00 657575      /usr/lib64/libdl-2.17.so
+7faffac8e000-7faffaca3000 r-xp 00000000 00:00 2338        /app/3rd/jdk/jdk1.8.0_65/lib/amd64/jli/libjli.so
+7faffaca3000-7faffaea3000 ---p 00015000 00:00 2338        /app/3rd/jdk/jdk1.8.0_65/lib/amd64/jli/libjli.so
+7faffaea3000-7faffaea4000 rw-p 00015000 00:00 2338        /app/3rd/jdk/jdk1.8.0_65/lib/amd64/jli/libjli.so
+7faffaea4000-7faffaebb000 r-xp 00000000 00:00 657595      /usr/lib64/libpthread-2.17.so
+7faffaebb000-7faffb0ba000 ---p 00017000 00:00 657595      /usr/lib64/libpthread-2.17.so
+7faffb0ba000-7faffb0bb000 r--p 00016000 00:00 657595      /usr/lib64/libpthread-2.17.so
+7faffb0bb000-7faffb0bc000 rw-p 00017000 00:00 657595      /usr/lib64/libpthread-2.17.so
+7faffb0bc000-7faffb0c0000 rw-p 00000000 00:00 0           
+7faffb0c0000-7faffb106000 r-xp 00000000 00:00 2492801     /app/3rd/gperftools/lib/libtcmalloc.so.4.5.3
+7faffb106000-7faffb305000 ---p 00046000 00:00 2492801     /app/3rd/gperftools/lib/libtcmalloc.so.4.5.3
+7faffb305000-7faffb307000 r--p 00045000 00:00 2492801     /app/3rd/gperftools/lib/libtcmalloc.so.4.5.3
+7faffb307000-7faffb309000 rw-p 00047000 00:00 2492801     /app/3rd/gperftools/lib/libtcmalloc.so.4.5.3
+7faffb309000-7faffb4b5000 rw-p 00000000 00:00 0           
+7faffb4b5000-7faffb4d5000 r-xp 00000000 00:00 656965      /usr/lib64/ld-2.17.so
+7faffb586000-7faffb6ce000 rw-p 00000000 00:00 0           
+7faffb6d2000-7faffb6d5000 rw-p 00000000 00:00 0           
+7faffb6d5000-7faffb6d6000 r--p 00020000 00:00 656965      /usr/lib64/ld-2.17.so
+7faffb6d6000-7faffb6d7000 rw-p 00021000 00:00 656965      /usr/lib64/ld-2.17.so
+7faffb6d7000-7faffb6d8000 rw-p 00000000 00:00 0           
+7ffd68395000-7ffd683b6000 rw-p 00000000 00:00 0           [stack]
+7ffd683ef000-7ffd683f1000 r-xp 00000000 00:00 0           [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0           [vsyscall]

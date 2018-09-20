@@ -1,0 +1,5 @@
+(1).一个有意思的哥们写的RPC和各种benchmark.
+
+https://github.com/hank-whu/rpc-benchmark
+
+https://www.jianshu.com/u/0a6dfa6a5f2d
