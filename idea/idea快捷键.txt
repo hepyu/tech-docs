@@ -1,3 +1,9 @@
+idea打开settings的方式有三种：
+菜单栏 - File - Settings
+Ctrl + Alt + s
+工具栏 - Sttings按钮
+
+
 格式化	Ctrl+Alt+L
 在当前类找某个方法  Ctrl + F12
 全文查找：  Ctrl + Shift + F

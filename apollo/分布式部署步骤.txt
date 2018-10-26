@@ -1,0 +1,180 @@
+参考官方：
+https://github.com/ctripcorp/apollo/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2%E6%8C%87%E5%8D%97
+github地址：
+https://github.com/ctripcorp/apollo
+
+1.mysql5.7安装(centos7)：
+vi /etc/yum.repos.d/mysql-community.repo
+开启5.7-server的enabled=1,别的版本关掉。
+yum install mysql安装
+service mysqld start 启动
+注意记住临时密码。然后登陆Mysql，修改root密码：ALTER USER 'root'@'localhost' IDENTIFIED BY 'newPassword123@';
+SHOW VARIABLES WHERE Variable_name = 'version';  查看版本
+mysql -uroot -pnewPassword123@
+
+2.导入数据库：
+https://github.com/ctripcorp/apollo/blob/master/scripts/sql/apolloconfigdb.sql
+https://github.com/ctripcorp/apollo/blob/master/scripts/sql/apolloportaldb.sql
+
+mysql -uroot -pnewPassword123@ < a.sql
+
+3.下载安装包：
+最新release:https://github.com/ctripcorp/apollo/releases
+Apollo v1.0.0 Release
+apollo-adminservice-1.0.0-github.zip
+41.2 MB
+apollo-configservice-1.0.0-github.zip
+43.9 MB
+apollo-portal-1.0.0-github.zip
+32.7 MB
+
+
+4.测试环境部署拓扑&配置：
+
+4.1.apollo-dev机器:
+
+(4.1.a.)config-service配置.
+
+4.1.a.1.apollo-dev-x/apollo-configservice-1.0.0/scripts/startup.sh	配置不一样
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-1/apollo-config-service-dev1-100003171
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-2/apollo-config-service-dev2-100003172
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-3/apollo-config-service-dev3-100003173
+
+SERVER_PORT=8080
+SERVER_PORT=8081
+SERVER_PORT=8082
+
+注释掉：apollo-configservice.conf 中的：
+LOG_FOLDER
+
+
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-1/apollo-config-service-dev1-100003171
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-2/apollo-config-service-dev2-100003172
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-3/apollo-config-service-dev3-100003173
+
+
+4.1.a.2.apollo-dev-x/apollo-configservice-1.0.0/config/app.properties	配置不一样
+appId=100003171
+appId=100003172
+appId=100003173
+
+4.1.a.3.apollo-dev-x/apollo-configservice-1.0.0/config/application-github.properties  配置都一样
+# DataSource
+spring.datasource.url = jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8
+spring.datasource.username = root
+spring.datasource.password = newPassword123@
+
+(4.1.b.)admin-service配置.
+
+4.1.b.1.apollo-dev-1/apollo-adminservice-1.0.0/scripts/startup.sh 	配置不一样
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-1/apollo-admin-service-dev1-100004171
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-2/apollo-admin-service-dev2-100004172
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-3/apollo-admin-service-dev3-100004173
+
+SERVER_PORT=8090
+SERVER_PORT=8091
+SERVER_PORT=8092
+
+注释掉：apollo-adminservice.conf 中的：
+LOG_FOLDER
+
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-1/admin-service-dev1-100004171
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-2/admin-service-dev2-100004172
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-3/admin-service-dev3-100004173
+
+4.1.b.2.apollo-dev-x/apollo-adminservice-1.0.0/config/app.properties 配置不一样
+appId=100004171
+appId=100004172
+appId=100004173
+
+4.1.b.3.apollo-dev-x/apollo-adminservice-1.0.0/config/application-github.properties	配置都一样
+# DataSource
+spring.datasource.url = jdbc:mysql://localhost:3306/ApolloConfigDB?characterEncoding=utf8
+spring.datasource.username = root
+spring.datasource.password = newPassword123@
+
+
+(4.1.c.)portal配置.全局所有环境的portal都通过dev的portal操作.
+
+4.1.c.1.apollo-dev-x/apollo-portal-1.0.0/apollo-portal.conf 配置不一样
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-1/apollo-portal-dev1-100005171
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-2/apollo-portal-dev2-100005172
+LOG_DIR=/data/coohua/logs/apollo-dev/apollo-dev-3/apollo-portal-dev3-100005173
+
+SERVER_PORT=8070
+SERVER_PORT=8071
+SERVER_PORT=8072
+
+注释掉：apollo-portal.conf 中的：
+LOG_FOLDER
+
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-1/apollo-portal-dev1-100005171
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-2/apollo-portal-dev2-100005172
+mkdir -p /data/coohua/logs/apollo-dev/apollo-dev-3/apollo-portal-dev3-100005173
+
+4.1.c.2.apollo-dev-x/apollo-portal-1.0.0/config/app.properties 配置不一样
+appId=100005171
+appId=100005172
+appId=100005173
+
+4.1.c.3.apollo-dev-x/apollo-portal-1.0.0/config/apollo-env.properties 配置不一样,域名不一样（如果是在同一台机器，则端口不一样）
+apollo-dev-1
+#local.meta=http://localhost:8080
+dev.meta=http://apollo-dev-1:8080
+#fat.meta=http://fill-in-fat-meta-server:8080
+#uat.meta=http://fill-in-uat-meta-server:8080
+#lpt.meta=${lpt_meta}
+#pro.meta=http://fill-in-pro-meta-server:8080
+
+4.1.c.4.apollo-dev-x/apollo-portal-1.0.0/config/application-github.properties	配置都一样
+# DataSource
+spring.datasource.url = jdbc:mysql://localhost:3306/ApolloPortalDB?characterEncoding=utf8
+spring.datasource.username = root
+spring.datasource.password = newPassword123@
+
+
+5.更改ApolloConfigDB.ServerConfig中的eureka地址为集群：apollo-dev-1 apollo-dev-2 apollo-dev-3
+eureka.service.url
+update ServerConfig set value="http://apollo-dev-1:8080/eureka/,http://apollo-dev-2:8081/eureka/,http://apollo-dev-3:8082/eureka/"  where `key`="eureka.service.url"\G
+
+原值：
+update ServerConfig set value="http://localhost:8080/eureka/"  where `key`="eureka.service.url"\G
+
+调整ApolloPortalDB配置
+配置项统一存储在ApolloPortalDB.ServerConfig表中，也可以通过管理员工具 - 系统参数页面进行配置。
+apollo.portal.envs - 可支持的环境列表
+DEV,FAT,UAT,PRO
+初始值只有DEV
+update ServerConfig set value='DEV,UAT,PRO' where id=1;
+
+6.启动：
+apollo-dev-1/apollo-configservice-1.0.0/scripts/startup.sh 
+apollo-dev-1/apollo-adminservice-1.0.0/scripts/startup.sh 
+apollo-dev-1/apollo-portal-1.0.0/scripts/startup.sh 
+
+apollo-dev-2/apollo-configservice-1.0.0/scripts/startup.sh 
+apollo-dev-2/apollo-adminservice-1.0.0/scripts/startup.sh 
+apollo-dev-2/apollo-portal-1.0.0/scripts/startup.sh 
+
+apollo-dev-3/apollo-configservice-1.0.0/scripts/startup.sh 
+apollo-dev-3/apollo-adminservice-1.0.0/scripts/startup.sh 
+apollo-dev-3/apollo-portal-1.0.0/scripts/startup.sh 
+
+7.验证：
+以apollo-dev-1为例：
+portal:	http://172.31.6.103:8070/
+eureka/configservice: http://172.31.6.103:8080/
+adminservice:	http://172.31.6.103:8090/	
+
+8.关闭：
+apollo-dev-1/apollo-configservice-1.0.0/scripts/shutdown.sh 
+apollo-dev-1/apollo-adminservice-1.0.0/scripts/shutdown.sh 
+apollo-dev-1/apollo-portal-1.0.0/scripts/shutdown.sh 
+
+apollo-dev-2/apollo-configservice-1.0.0/scripts/shutdown.sh 
+apollo-dev-2/apollo-adminservice-1.0.0/scripts/shutdown.sh 
+apollo-dev-2/apollo-portal-1.0.0/scripts/shutdown.sh 
+
+apollo-dev-3/apollo-configservice-1.0.0/scripts/shutdown.sh 
+apollo-dev-3/apollo-adminservice-1.0.0/scripts/shutdown.sh 
+apollo-dev-3/apollo-portal-1.0.0/scripts/shutdown.sh 

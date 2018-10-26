@@ -1,0 +1,12 @@
+1.高可用和日志问题 v0.10.2
+https://github.com/ctripcorp/apollo/issues/1174
+高可用：apollo-portal、apollo-adminservice、apollo-configservice都是支持运行多个实例的，我们在生产环境也都是集群部署的
+
+Value 自动更新功能疑惑
+https://github.com/ctripcorp/apollo/issues/1193
+
+Spring Placeholder的使用
+https://github.com/ctripcorp/apollo/wiki/Java%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97#322-spring-placeholder%E7%9A%84%E4%BD%BF%E7%94%A8
+
+Value  自动更新样例程序
+https://github.com/ctripcorp/apollo/pull/972

@@ -1,0 +1,145 @@
+https://blog.csdn.net/zhengfeng2100/article/details/53482617
+
+IP :      192.168.5.230
+
+OS:      CentOS 6.8
+
+mysql:    5.7.16  
+
+程序目录：       /usr/local/mysql
+
+数据文件目录:  /data/mysql
+
+下载地址http://dev.mysql.com/downloads/mysql/; Linux-Generic 为免安装版本，我选择的64位
+
+具体安装方法mysql网站有文档，英文好的话就别看我写的了。
+
+ 
+
+一，安装前准备
+
+     1，关闭防火墙        #setup中关闭
+
+     2，关闭selinux      #此项未测试是否必须
+
+       shell>vi/etc/selinux/config
+
+         SELINUX=disabled   # SELINUX参数enforcing代表打开，disabled代表关闭
+
+      3，建立myql帐号
+
+        shell> useradd mysql
+
+      4，mysql对libaio库有依赖，查询安装 libaio库
+
+       shell> yumsearch libaio
+
+       shell> yuminstall libaio
+
+       5，查询系统是否有旧版的myql，请删除。#查询方法：rpm –qa|grep mysql
+
+       6，下载mysql5.7.16
+
+          shell>wget http://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.16-linux-glibc2.5-x86_64.tar.gz
+
+ 
+
+二，mysql安装
+
+1，解压安装文件;复制到/usr/local/mysql
+
+shell>tar –zxvf mysql-5.7.16-linux-glibc2.5-x86_64.tar.gz
+
+shell>cp -R mysql-5.7.16-linux-glibc2.5-x86_64 /usr/local/mysql
+
+      2，配置/etc/my.cnf
+
+         shell>vi/etc/my.cnf
+
+[mysqld]
+
+#skip-grant-tables
+
+#指定单个table引擎
+
+#sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+
+datadir=/data/mysql
+
+basedir=/usr/local/mysql
+
+ 
+
+##open sqllog
+
+general_log=ON
+
+general_log_file=/data/mysql/query.log
+
+ 
+
+ 
+
+#开启事件计划
+
+event_scheduler = 1
+
+ 
+
+#开启bin-log
+
+log_bin=/data/bin/mysql-bin
+
+server-id=230
+
+#explicit_defaults_for_timestamp=true
+
+ 
+
+3，修改root帐号.bash_profile
+
+shell> vi/root/.bash_profile
+
+#PATH=$PATH:$HOME/bin
+
+PATH=$PATH:$HOME/bin:/usr/local/mysql/bin
+
+      4，mysql安装
+
+        shell>cd/usr/local/mysql/
+
+        shell>bin/mysqld –initialize        #记住临时密码
+
+       shell>bin/mysql_ssl_rsa_setup
+
+       shell>bin/mysqld_safe --user=mysql&
+
+      shell>chown -R mysql:mysql /usr/local/mysql/   #变更权限
+
+     shell>mkdir –p /data/mysql                      #建立数据文件目录并授权
+
+     shell>chown –R mysql:mysql /data/mysql
+
+ 
+
+      5，启动mysql并设置开机启动
+
+        shell>cp /usr/local/mysql/support-files/mysql.server  /etc/init.d/mysqld
+
+        shell>servicemysqld start
+
+       shell>chkconfig --add mysqld           #加入开机启动
+
+      6，登录mysql
+
+       shell>mysql –uroot –p     #输入之前的临时密码
+
+       shell> alter user 'root'@'localhost'identified by "fineex.1";
+
+         注： 此版本登陆后必须更改密码后才能进行其它数据库操作。
+
+      shell> grant all to 'root'@'%' identified by "foxconn.1"; #授权远程登录mysql；%是允许所有主机访问，请谨慎使用
+
+---------------------
+
+本文来自 zhengfeng2100 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/zhengfeng2100/article/details/53482617?utm_source=copy 

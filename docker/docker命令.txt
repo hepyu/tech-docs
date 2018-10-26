@@ -1,0 +1,17 @@
+1.查看运行中的容器：
+docker ps
+
+2.通过容器id进入该容器：
+sudo docker exec -it 216da717b457 /bin/bash
+
+3.删除container
+
+# docker ps -a
+找到了要刪除的 container 的 container id 後, 如果 container 正在執行, 要先停止才可以刪除, 以下是將 container 停止及刪除的指令:
+
+# docker stop container_id
+# docker rm container_id
+如果想一次過將所有 container 停止及刪除, 執行以下指令:
+
+# docker stop $(docker ps -a -q)
+# docker rm $(docker ps -a -q)

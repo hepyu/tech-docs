@@ -1,0 +1,34 @@
+https://forums.vandyke.com/showthread.php?t=11631
+
+For Users Wanting Help With RegEx Keyword Colorization
+I absolutely love the keyword colorization in the SecureCRT 7.3. If you happen to use Cisco gear and want a bit of a head start on creating your own keyword list, then you may use mine as a template if you wish.
+
+I do a lot of work in Cisco IOS routers/switches, Nexus Switches, and ASAs. My keyword file is setup to assist me with that. I find it helpful and hopefully you will too.
+
+I'm constantly changing my keyword file. Feel free to change it up as much as you wish. I'm not married to it; I'm just trying to help out the community here.
+
+Here's some basic steps that I would recommend for installing:
+Set your Terminal color screen to Monochrome (black and white), but then change the BLACK font to GRAY. To me, the black text simply seems too harsh on the eyes. Gray text helps the colors flow better and my eyes bleed less.
+
+Save the attached keyword file to the "Keywords" folder within your configuration folder and then select it within the SecureCRT GUI (Make sure you check the 'Color' checkbox).
+Attached are some screen caps to hopefully help out.
+For me, I made the changes to my 'default session' so that all sessions are affected. It's up to you on how you choose to proceed.
+If you want the keyword list to change the default font color for you (and ignore step 1 above), you can edit the last rule titled ".*|setasregextosetdefaultcolor" and check the RegEx check box. It will then manually force your default color to gray.
+
+
+Holler if you have any questions. My RegEx code may not be the most efficient, and that's largely due to the fact that I only started learning this stuff once SecureCRT started supporting it. 
+
+Take care...
+
+[Edit 10/24/2014] 
+Uploaded new 'Cisco Words' keyword file; tweaked wording in post.
+Attached Images
+File Type: jpg	SecureCRT - Change Font to Gray.jpg (149.8 KB, 7307 views)
+File Type: jpg	SecureCRT - Locate Config Path.jpg (77.7 KB, 7754 views)
+File Type: jpg	SecureCRT - Select Keyword File in Dropdown list.jpg (88.4 KB, 8509 views)
+File Type: jpg	SecureCRT - Sample1.jpg (367.8 KB, 8899 views)
+File Type: jpg	SecureCRT - Sample2.jpg (244.6 KB, 6339 views)
+File Type: jpg	SecureCRT - Sample3.jpg (165.1 KB, 5788 views)
+Attached Files
+File Type: zip	Cisco Words.zip (1.7 KB, 7200 views)
+File Type: ini	Cisco Words.ini (4.0 KB, 2779 views)

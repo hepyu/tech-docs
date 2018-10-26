@@ -1,0 +1,66 @@
+https://blog.csdn.net/uvw2008/article/details/7729541?utm_source=copy
+
+1、问题：
+这几天在使用ant的打包工具zip类时，发现打包大量数据时出现OutOfMemory：
+
+Caused by: java.lang.OutOfMemoryError
+
+        at java.util.zip.Deflater.init(Native Method)
+
+        at java.util.zip.Deflater.<init>(Deflater.java:124)
+
+        at org.apache.tools.zip.ZipOutputStream.<init>(ZipOutputStream.java:213)
+
+2、求证过程：
+2.1  外事不决问google
+内存溢出总是这么让人头疼，看别人代码更是一种让人想死的活，多种手段求索无果.后看到报错地方@Deflater，述使用google查询下Deflater的相关介绍，查到如下网址：http://www-01.ibm.com/support/docview.wss?uid=swg21227106
+
+豁然开朗，IBM好同志啊，文中介绍了Deflater不正确使用可能导致crash问题并介绍了正确使用方式，部分内容摘录如下：
+
+If a deflater object is not explicitly closed and ended, a native memory leak occurs. This leak can result in OutOfMemoryError's and/or Java�6�4 Virtual Machine (JVM) crashes.
+
+Cause
+Not explicitly closing and ending a deflater object (such as, DeflaterOutputStream, GZIPOutputStream or ZipOutputStream) causes a native memory leak. This native leak can result in OutOfMemoryError's in the WebSphere Application Server logs as well as JVM hangs and crashes. The following error in the WebSphere Application Server SystemOut.log or SystemErr.log files is a potential indicator of a native issue caused by this type of deflater leak
+
+       正确使用方式：
+
+try {
+    Deflater zip = new Deflater(level);
+    DeflaterOutputStream defStream = new DeflaterOutputStream(out);
+}  
+finally {
+    defStream.close();
+    zip.end();
+}
+
+在使用完Deflater之后一定要调用该类的end方法进行释放！！      
+
+  看到这里为什么内存溢出似乎已经有了个光明正大的解释，但是问题是我并不是直接使用Deflater类做压缩的。。。
+
+2.2 求解apache
+查看堆栈确定是使用org.apache.tools.zip.ZipOutputStream时报出来的错误，这个包来源于ant.jar，下载ant的源码找到该包中Deflater使用的地方,如下：
+
+          public void finish()  throws IOException
+  {
+    closeEntry();
+    this.cdOffset = this.written;
+    for (Iterator i = this.entries.iterator(); i.hasNext(); ) {
+      writeCentralFileHeader((ZipEntry)i.next());
+    }
+    this.cdLength = (this.written - this.cdOffset);
+    writeCentralDirectoryEnd();
+    this.offsets.clear();
+    this.entries.clear();
+    this.def.end();
+  }
+
+        原来是在finish方法中进行Deflater资源的释放～～，一般在使用流的时候只需要close掉流即可，看来使用ZipOutputStream还需要调用finish方法进行资源的释放才行。经修改代码加在finish方法的调用后解决。
+
+3、总结
+Deflater使用完后一定得要end；ant的打包工具类ZipOutputStream除了close掉外还得使用finish来释放资源；尽量使用高版本（我使用的是1.8）的ant打包，有些低版本ant中的ZipOutputStream即使你finish了照样没用，因为低版本的这个方法里也米有end掉Deflater,结果仍然OOM。
+
+
+
+---------------------
+
+本文来自 uvw2008 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/uvw2008/article/details/7729541?utm_source=copy 
