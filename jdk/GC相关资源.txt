@@ -1,0 +1,19 @@
+可以先加一台看看：
+-XX:MaxGCPauseMillis=300 -XX:+DisableExplicitGC -XX:+UseG1GC -XX:LargePageSizeInBytes=128m -Xloggc:/data/coohua/logs/information/gc.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps
+全部已读
+11分钟前
+鹏远
+XX:MaxGCPauseMillis：预测最大停顿时间（不是绝对依据，GC会尽量停顿不超过这个时间），默认200毫秒。
+DisableExplicitGC ：防止直接内存使用不当造成的内存泄露。和G1无关。
+UseG1GC ：开启G1。
+XX:LargePageSizeInBytes：指定内存页大小，调试值，影响寄存器是否能存放所有内存也地址列表，影响内存访问速度。
+Xloggc：gc log位置
+-XX:+PrintGCDetails -XX:+PrintGCDateStamps：打印详细GC信息。
+
+这三篇不错：
+oracle官方：
+https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html
+美团article：
+https://tech.meituan.com/g1.html
+阿里article：
+http://jm.taobao.org/2009/11/21/3157/
