@@ -1,0 +1,2 @@
+1.nginx重要参数调优
+https://www.nginx.com/blog/tuning-nginx/

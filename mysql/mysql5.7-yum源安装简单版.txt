@@ -8,6 +8,7 @@ vi /etc/yum.repos.d/mysql-community.repo
 开启5.7-server的enabled=1,别的版本关掉。
 yum install mysql-community-server	安装
 service mysqld start 启动
+临时密码： cat /var/log/mysqld.log  | grep password
 注意记住临时密码。然后登陆Mysql，修改root密码：ALTER USER 'root'@'localhost' IDENTIFIED BY 'newPassword123@';
 SHOW VARIABLES WHERE Variable_name = 'version';  查看版本
 

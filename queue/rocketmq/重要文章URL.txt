@@ -1,0 +1,5 @@
+1.Kafka、RabbitMQ、RocketMQ 消息中间件的对比 | 消息发送性能篇
+https://yq.aliyun.com/articles/175529?spm=5176.10695662.1996646101.searchclickresult.4daa571dBsV1M0
+
+2.滴滴出行基于RocketMQ构建企业级消息队列服务的实践
+https://mp.weixin.qq.com/s/v6NM3UgX-qTI7yO1QPCJrw

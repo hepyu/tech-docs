@@ -1,0 +1,20 @@
+1.tcp_max_tw_buckets
+
+ne-nginx001-new(centos7.3):
+net.ipv4.tcp_max_tw_buckets = 1800000
+centos6.5(ne-nginx004):
+net.ipv4.tcp_max_tw_buckets = 5000
+
+如果nginx的访问量/并发量很大，time_wait会很高，超过内核参数，如果这个值设置小了，会发生tw-bucket溢出。
+在/var/log/messages会打印日志：
+
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
+Dec  4 17:22:27 ne-nginx004 kernel: TCP: time wait bucket table overflow
