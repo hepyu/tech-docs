@@ -8,9 +8,7 @@ wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.5.4/binaries/apa
 vi /etc/profile 写入如下：
 
 MAVEN_HOME=/usr/local/apache-maven-3.5.0
-
 export MAVEN_HOME
-
 export PATH=${PATH}:${MAVEN_HOME}/bin
 
 3.验证:
