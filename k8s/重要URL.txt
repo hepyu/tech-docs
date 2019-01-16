@@ -1,0 +1,5 @@
+1.Kubernetes
+https://yeasy.gitbooks.io/docker_practice/kubernetes/
+
+2.docker官方安装：
+https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce

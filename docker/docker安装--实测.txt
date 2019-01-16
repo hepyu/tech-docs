@@ -1,0 +1,89 @@
+参考：
+docker官方安装
+https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce
+
+(1).docker安装
+
+1.Uninstall old versions
+Older versions of Docker were called docker or docker-engine. If these are installed, uninstall them, along with associated dependencies.
+
+$ sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+				  
+
+				  
+2.SET UP THE REPOSITORY
+
+2.1.Install required packages. yum-utils provides the yum-config-manager utility, and device-mapper-persistent-data and lvm2 are required by the devicemapper storage driver.
+
+$ sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+2.2Use the following command to set up the stable repository. You always need the stable repository, even if you want to install builds from the edge or test repositories as well.
+
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+2.3Optional:（我选择enable） Enable the edge and test repositories. These repositories are included in the docker.repo file above but are disabled by default. You can enable them alongside the stable repository.
+
+$ sudo yum-config-manager --enable docker-ce-edge
+$ sudo yum-config-manager --enable docker-ce-test
+
+
+2.4.可选择（我没选）：You can disable the edge or test repository by running the yum-config-manager command with the --disable flag. To re-enable it, use the --enable flag. The following command disables the edge repository.
+
+$ sudo yum-config-manager --disable docker-ce-edge
+Note: Starting with Docker 17.06, stable releases are also pushed to the edge and test repositories.	
+
+3.INSTALL DOCKER CE
+
+3.1和3.2选择一个。
+
+3.1.(安装最新的Docker版本,我选择最新版本)Install the latest version of Docker CE, or go to the next step to install a specific version:
+
+$ sudo yum install docker-ce
+If prompted to accept the GPG key, verify that the fingerprint matches 060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35, and if so, accept it.
+
+Got multiple Docker repositories?
+
+If you have multiple Docker repositories enabled, installing or updating without specifying a version in the yum install or yum update command always installs the highest possible version, which may not be appropriate for your stability needs.
+
+Docker is installed but not started. The docker group is created, but no users are added to the group.
+
+3.2.(安装指定的Docker版本)To install a specific version of Docker CE, list the available versions in the repo, then select and install:
+
+a. List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
+
+$ yum list docker-ce --showduplicates | sort -r
+
+docker-ce.x86_64            18.09.0.ce-1.el7.centos             docker-ce-stable
+The list returned depends on which repositories are enabled, and is specific to your version of CentOS (indicated by the .el7 suffix in this example).
+
+b. Install a specific version by its fully qualified package name, which is the package name (docker-ce) plus the version string (2nd column) up to the first hyphen, separated by a hyphen (-), for example, docker-ce-18.03.0.ce.
+
+$ sudo yum install docker-ce-<VERSION STRING>
+Docker is installed but not started. The docker group is created, but no users are added to the group.
+
+3.3.启动：Start Docker.
+
+$ sudo systemctl start docker
+
+3.4.验证docker是否work:Verify that docker is installed correctly by running the hello-world image.
+
+$ sudo docker run hello-world
+This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits.
+
+Docker CE is installed and running. You need to use sudo to run Docker commands. Continue to Linux postinstall to allow non-privileged users to run Docker commands and for other optional configuration steps.
+
+3.5.升级方式：UPGRADE DOCKER CE
+To upgrade Docker CE, follow the installation instructions, choosing the new version you want to install.			  

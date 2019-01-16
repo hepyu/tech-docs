@@ -1,2 +1,0 @@
-1.Kubernetes
-https://yeasy.gitbooks.io/docker_practice/kubernetes/

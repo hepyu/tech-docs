@@ -1,0 +1,9 @@
+参考：
+docker官方安装
+https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce
+
+(1).docker安装
+参考docker目录下的安装手册。
+
+(2).
+	  

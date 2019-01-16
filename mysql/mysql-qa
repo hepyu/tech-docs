@@ -1,5 +1,0 @@
-# 1.HikariPool$PoolInitializationException: Failed to initialize pool: Public Key Retrieval is not allowed
-
-jdbc连接后面添加 allowPublicKeyRetrieval=true
-
-mysql5及之前的版本使用的是旧版驱动"com.mysql.jdbc.Driver"，mysql6以及之后的版本需要更新到新版驱动，对应的Driver是"com.mysql.cj.jdbc.Driver"，但是这个驱动错误的信息是"Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary."，排除这个原因。
